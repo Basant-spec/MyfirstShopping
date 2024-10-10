@@ -1,9 +1,7 @@
 package com.Myfirstshopping.website.Myfirstshopping.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -20,6 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AppUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
      private UUID id;
     private String name;
     private int age;
