@@ -1,10 +1,7 @@
 package com.Myfirstshopping.website.Myfirstshopping.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Product {
    @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
    private UUID id;
    @Column (nullable = false,unique = true)
    private String productName;
