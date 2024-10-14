@@ -45,6 +45,17 @@ public class CommonUserService {
 
       return user;
     }
+
+    public Boolean isSeller(UUID sellerID){
+     AppUser user=getUserById(sellerID);
+        if(user==null){
+      return null;
+        }
+
+       return user.getUserType().equals("SELLER");
+
+
+    }
     public void registerUser(AppUser user){
 
         userRepositery.save(user);
