@@ -1,14 +1,17 @@
 package com.Myfirstshopping.website.Myfirstshopping.Controller;
 
+import com.Myfirstshopping.website.Myfirstshopping.ResponseBody.ProductResponseBody;
 import com.Myfirstshopping.website.Myfirstshopping.Service.SellerService;
-import com.Myfirstshopping.website.Myfirstshopping.exception.AccessNotFound;
 import com.Myfirstshopping.website.Myfirstshopping.exception.InvalidProductID;
 import com.Myfirstshopping.website.Myfirstshopping.exception.UserNotFound;
 import com.Myfirstshopping.website.Myfirstshopping.model.Product;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/seller")
@@ -34,12 +37,16 @@ public void addProduct(@RequestBody Product product, @RequestParam UUID sellerID
      }catch(InvalidProductID invalidProductID){
          return invalidProductID.getMessage();
      }
-
-
-
-
-
 }
+
+    @GetMapping("/product/all")
+    public List<ProductResponseBody> getAllProducts(@RequestParam UUID sellerID){
+        return sellerService.getAllProductBySellerID(sellerID);
+    }
+
+
+
+
 
 
 }
