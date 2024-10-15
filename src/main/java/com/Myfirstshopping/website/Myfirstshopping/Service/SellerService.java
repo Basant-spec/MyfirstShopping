@@ -92,6 +92,52 @@ public class SellerService {
         return productResponseBodyList;
     }
 
+   public Double getProductRatingByID(UUID productID,UUID sellerID ){
+        Boolean isSeller= commonuserService.isSeller(sellerID);
+        if(isSeller==null){
+            throw new UserNotFound(String.format("User with this id %s does not exisr",sellerID.toString()));
+        }
+        if(isSeller==false){
+            throw new UserNotFound(String.format("User with this id %s does not exisr",sellerID.toString()));
+        }
+
+       boolean validProduct= productService.validateProductID(productID);
+       if(validProduct=false){
+           throw new InvalidProductID(String.format("product with this id %s is invalid",productID.toString()));
+       }
+       Product product = productService.getProductByID(productID);
+       AppUser owner=product.getSeller();
+       if(!owner.getId().equals(sellerID)){
+           throw new AccessNotFound(String.format("User with this id %s does not have access to delete the product id %s ",owner.getName(),product.getProductName()));
+
+       }
+        return product.getRating();
+
+   }
+
+   ////////////////////////
+   public Integer getProductTotalQuantitySoldByID(UUID productID,UUID sellerID ){
+       Boolean isSeller= commonuserService.isSeller(sellerID);
+       if(isSeller==null){
+           throw new UserNotFound(String.format("User with this id %s does not exisr",sellerID.toString()));
+       }
+       if(isSeller==false){
+           throw new UserNotFound(String.format("User with this id %s does not exisr",sellerID.toString()));
+       }
+
+       boolean validProduct= productService.validateProductID(productID);
+       if(validProduct=false){
+           throw new InvalidProductID(String.format("product with this id %s is invalid",productID.toString()));
+       }
+       Product product = productService.getProductByID(productID);
+       AppUser owner=product.getSeller();
+       if(!owner.getId().equals(sellerID)){
+           throw new AccessNotFound(String.format("User with this id %s does not have access to delete the product id %s ",owner.getName(),product.getProductName()));
+
+       }
+       return product.getTotalSoldQuantity();
+
+   }
 
 
 
