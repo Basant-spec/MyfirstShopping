@@ -24,7 +24,7 @@ public class Product {
    private double rating;
     @Column (nullable = false)
    private int totalSoldQuantity;
-    @Column (nullable = false, unique=true)
+    @Column (nullable = false)
    private String category;
    @ManyToOne
     AppUser seller;
