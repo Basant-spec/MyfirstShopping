@@ -44,9 +44,10 @@ public interface ProductRepositery extends JpaRepository<Product, UUID> {
 
     @Query(value = "select * from product limit 10", nativeQuery = true)
     public List<Product> getProducts();
-  @Transactional
-  @Modifying
-   @Query(value="update product set quantity=:quantity,total_Sold_Quantity=:totalSoldQuantity where id=:id")
+
+    @Transactional
+    @Modifying
+    @Query(value="update product set quantity=:quantity, total_sold_quantity=:totalSoldQuantity where id=:id",nativeQuery=true)
     public void updateQuantity(int quantity,UUID id,int totalSoldQuantity);
 
 }
